@@ -11,8 +11,15 @@ class Common
 
         try {
             $this->pdo = new PDO($dsn, DB_USERNAME, DB_PASSWORD, DB_OPTIONS);
-        } catch (\Throwable $th) {
-            //throw $th;
+        } catch (PDOException $e) {
+            throw new Exception('Lỗi kết nỗi cơ sở dữ liệu' . $e->getMessage());
         }
     }
+
+    public function __destruct()
+    {
+        $this->pdo = null;
+    }
 }
+
+$common = new Common();

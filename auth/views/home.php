@@ -10,11 +10,14 @@
 </head>
 
 <body>
-    <h1>Đây là trang chủ</h1>
+    <div class="container">
+        <h1 class="text-center mt-3">Đây là trang chủ</h1>
 
-    <?php if (!empty($_SESSION['user'])): ?>
-        <a href="<?= BASE_URL . '?act=logout' ?>" class="btn btn-secondary" onclick="return confirm('Đăng suất?')">Đăng Suất</a>
-    <?php endif; ?>
+        <?php if (!empty($_SESSION['user'])): ?>
+            <h3>Xin chào <?= $_SESSION['user']['name'] ?></h3>
+            <a href="<?= BASE_URL . '?act=logout' ?>" class="btn btn-secondary" onclick="return confirm('Đăng suất?')">Đăng Suất</a>
+        <?php endif; ?>
+    </div>
 </body>
 
 </html>
