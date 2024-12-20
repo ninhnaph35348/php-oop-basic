@@ -12,11 +12,17 @@ require_once './models/Auth.php';
 
 $act = $_GET['act'] ?? '/';
 
-$isLoggedIn = isset($_SESSION['user']);
+if (
+    empty($_SESSION['user'])
+    && !in_array($act, ['login', 'post-login'])
+) {
+    header('Location: ' . BASE_URL . '?act=login');
+    exit();
+}
 
 
 match ($act) {
-    '/' => $isLoggedIn ? (new HomeController)->index() : header('Location:'  . BASE_URL . '?act=login'),
+    '/' => (new HomeController)->index(),
     'login' => (new AuthController)->login(),
     'post-login' => (new AuthController)->postLogin(),
     'register' => (new AuthController)->register(),
